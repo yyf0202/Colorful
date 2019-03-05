@@ -95,7 +95,7 @@ public class PlanerReflection : MonoBehaviour
 
         m_reflectionCamera.transform.position = reflectionMatrix.MultiplyPoint(srcCam.transform.position);
         m_reflectionCamera.worldToCameraMatrix = srcCam.worldToCameraMatrix * reflectionMatrix;
-        Debug.Log(m_reflectionCamera.worldToCameraMatrix.ToString());
+        //Debug.Log(m_reflectionCamera.worldToCameraMatrix.ToString());
 
         //Set Oblique Projection Matrix
         if (EnableObliqueProjection)
