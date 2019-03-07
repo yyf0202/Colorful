@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Outline : MonoBehaviour
+public class CameraEffectManager : MonoBehaviour
 {
 
     #region Private Members
@@ -62,7 +62,7 @@ public class Outline : MonoBehaviour
         }
     }
 
-    private void DrawOutline()
+    private void Outline()
     {
         var cam = Camera.current;
         if (cam == null && cam != m_mainCam)
@@ -96,7 +96,7 @@ public class Outline : MonoBehaviour
         command.GetTemporaryRT(blur1, (int)(m_mainCam.pixelWidth * qualityBlur), (int)(m_mainCam.pixelHeight * qualityBlur), 0, FilterMode.Bilinear, RenderTextureFormat.ARGB32);
         command.GetTemporaryRT(blur2, (int)(m_mainCam.pixelWidth * qualityBlur), (int)(m_mainCam.pixelHeight * qualityBlur), 0, FilterMode.Bilinear, RenderTextureFormat.ARGB32);
         command.GetTemporaryRT(blur3, (int)(m_mainCam.pixelWidth * qualityBlur), (int)(m_mainCam.pixelHeight * qualityBlur), 0, FilterMode.Bilinear, RenderTextureFormat.ARGB32);
-        command.SetGlobalColor(Uniforms._OutterLineColor, outterLineColor);
+        command.SetGlobalColor("_Outline_Color", outterLineColor);
 
         foreach (Renderer[] renders in renderDic.Values)
         {
@@ -106,7 +106,8 @@ public class Outline : MonoBehaviour
         }
 
         //3. Blur
-        command.SetGlobalFloat(Uniforms._OutterLineSize, outterLineSize);
+
+        command.SetGlobalFloat("outterLineSize", outterLineSize);
         command.Blit(sceneId, blur1, m_outlineMat, 0);
         command.Blit(blur1, blur2, m_outlineMat, 0);
         command.Blit(blur2, blur3, m_outlineMat, 0);
@@ -116,7 +117,7 @@ public class Outline : MonoBehaviour
 
         //4. Cut off
         command.Blit(sceneId, blur2, m_outlineMat, 3);
-        command.SetGlobalTexture(Uniforms._OutterlineBlurSilhouette, blur2);
+        command.SetGlobalTexture("g_BlurSilhouette", blur2);
         command.Blit(screenCopy, BuiltinRenderTextureType.CameraTarget, m_outlineMat, 4);
         command.ReleaseTemporaryRT(blur1);
         command.ReleaseTemporaryRT(blur2);
@@ -149,7 +150,7 @@ public class Outline : MonoBehaviour
 
     private void OnPreRender()
     {
-        DrawOutline();
+        Outline();
     }
     #endregion
 }

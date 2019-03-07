@@ -46,7 +46,7 @@ Shader "Colr/Gradient Skybox" {
     }
     
     fixed4 frag (v2f i) : COLOR {
-        half d = dot(normalize(i.texcoord), _Direction) * 0.5f + 0.5f;
+        half d = dot(normalize( half3(0,i.texcoord.y,0)), _Direction) * 0.5f + 0.5f;
         return lerp (_Color1, _Color2, pow(d, _Exponent)) * _Intensity;
     }
 

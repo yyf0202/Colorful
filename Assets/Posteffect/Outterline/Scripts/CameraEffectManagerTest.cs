@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class OutlineTest : MonoBehaviour
+public class CameraEffectManagerTest : MonoBehaviour
 {
     public List<GameObject> OutterlineGOs;
 
@@ -11,7 +11,7 @@ public class OutlineTest : MonoBehaviour
     {
         foreach (var go in OutterlineGOs)
         {
-            this.GetComponent<Outline>().AddOutterlineTarget(go);
+            this.GetComponent<CameraEffectManager>().AddOutterlineTarget(go);
         }
     }
 

@@ -101,7 +101,7 @@ public class PlanerReflection : MonoBehaviour
         if (EnableObliqueProjection)
         {
             m_reflectionCamera.projectionMatrix = srcCam.CalculateObliqueMatrix(GetCameraSpacePlane(m_reflectionCamera, m_trans.position, meshNormal));
-            Debug.Log(m_reflectionCamera.projectionMatrix.ToString());
+            //Debug.Log(m_reflectionCamera.projectionMatrix.ToString());
             m_reflectionCamera.farClipPlane = m_reflectionCamera.nearClipPlane + FarClipModifier;
         }
         else
