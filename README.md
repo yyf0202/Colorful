@@ -15,7 +15,7 @@
 --------
 
 - Unity 2018.3 or Newer
-- Post Process Stack V2
+- Post Process Stack V2(installed via package manager)
 
 ## Coming soon
 
