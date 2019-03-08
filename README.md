@@ -22,3 +22,4 @@
 --------
 
 - Sky System
+- HBAO
